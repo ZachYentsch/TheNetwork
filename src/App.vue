@@ -3,14 +3,19 @@
     <Navbar />
   </header>
   <main>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3">
-          <!-- <SideBar /> -->
+        <div class="col-md-2">
+          <SideBar />
+        </div>
+        <div class="col-md-9">
+          <router-view />
+        </div>
+        <div class="col-md-1">
+          <Animes />
         </div>
       </div>
     </div>
-    <router-view />
   </main>
   <footer></footer>
 </template>
