@@ -3,28 +3,30 @@
     <Navbar />
   </header>
   <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <!-- <SideBar /> -->
+        </div>
+      </div>
+    </div>
     <router-view />
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
-  </footer>
+  <footer></footer>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from './AppState'
+import { computed } from "vue";
+import { AppState } from "./AppState";
 export default {
-  name: 'App',
+  name: "App",
   setup() {
     return {
-      appState: computed(() => AppState)
-    }
-  }
-}
+      appState: computed(() => AppState),
+    };
+  },
+};
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
 </style>
