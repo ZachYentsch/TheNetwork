@@ -5,14 +5,14 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 bg-primary">
           <SideBar />
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <router-view />
         </div>
-        <div class="col-md-1">
-          <Animes />
+        <div class="col-md-2">
+          <Animes v-for="a in animes" :key="a.title" :anime="a" />
         </div>
       </div>
     </div>
@@ -21,12 +21,24 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { AppState } from "./AppState";
+import Pop from "./utils/Pop";
+import { animesService } from "./services/AnimesService";
+import { logger } from "./utils/Logger";
 export default {
   name: "App",
   setup() {
+    onMounted(async () => {
+      try {
+        await animesService.getAnimes();
+      } catch (error) {
+        Pop.toast(error.message, "error");
+        logger.log(error);
+      }
+    });
     return {
+      animes: computed(() => AppState.animes),
       appState: computed(() => AppState),
     };
   },
