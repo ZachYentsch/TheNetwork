@@ -9,6 +9,12 @@ class ProfilesService {
         logger.log('profile Res', res.data)
         AppState.profile = res.data
     }
+
+    async editProfile(updatedProfile, query = '') {
+        const res = await api.put('api/profiles' + query, updatedProfile)
+        logger.log(res.data)
+        AppState.profile = new Profile(res.data)
+    }
 }
 
 export const profilesService = new ProfilesService()

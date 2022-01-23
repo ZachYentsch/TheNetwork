@@ -17,7 +17,17 @@
       </div>
       <div class="card-footer d-flex justify-content-around">
         <div class="text-center"><small>2 hours ago</small></div>
-        <span><i class="mdi mdi-heart"></i></span>
+        <span
+          ><i class="mdi mdi-heart"></i>
+          <p>1</p></span
+        >
+        <span
+          ><i
+            v-if="post.creatorId == account.id"
+            @click="removePost()"
+            class="mdi mdi-trash-can selectable"
+          ></i
+        ></span>
       </div>
     </div>
   </div>
@@ -25,7 +35,12 @@
 
 
 <script>
+import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import { AppState } from "../AppState";
+import { postsService } from "../services/PostsService";
+import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
 export default {
   props: {
     post: {
@@ -36,7 +51,17 @@ export default {
   setup(props) {
     const router = useRouter();
     return {
+      account: computed(() => AppState.account),
       router,
+      // REVIEW Why does this work only work on refresh
+      async removePost() {
+        try {
+          await postsService.removePost(props.post.id);
+        } catch (error) {
+          Pop.toast(error.message, "error");
+          logger.log(error.message);
+        }
+      },
       async goToProfile() {
         router.push({
           name: "Profile",
