@@ -5,7 +5,9 @@
   >
     <div class="py-3 align-items-center">
       <img :src="user.picture" alt="" height="60" class="rounded" />
-      <h4>{{ user.name }}</h4>
+      <h5>{{ user.name }}</h5>
+      <p>{{ user.email }}</p>
+      <p>{{ user.bio }}</p>
     </div>
   </div>
 </template>

@@ -27,6 +27,12 @@
             @click="removePost()"
             class="mdi mdi-trash-can selectable"
           ></i
+          ><i
+            v-if="post.creatorId == account.id"
+            date-bs-toggle="modal"
+            data-bs-target="#edit-modal"
+            class="mdi mdi-pencil selectable"
+          ></i
         ></span>
       </div>
     </div>
@@ -60,6 +66,14 @@ export default {
         } catch (error) {
           Pop.toast(error.message, "error");
           logger.log(error.message);
+        }
+      },
+      async editPost() {
+        try {
+          await postsService.editPost(props.post);
+        } catch (error) {
+          logger.log(error.message);
+          Pop.toast(error.message, "error");
         }
       },
       async goToProfile() {

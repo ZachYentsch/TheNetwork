@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div v-if="profile.id == account.id">
+      <EditProfile />
+    </div>
     <div>
       <CreatePost />
     </div>

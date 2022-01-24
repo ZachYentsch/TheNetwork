@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { Post } from "../models/Post"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
@@ -17,9 +18,23 @@ class PostsService {
         AppState.posts.unshift(res.data)
     }
 
+    async editPost(updatedPost) {
+        const res = await api.put(`api/posts/:id`, updatedPost)
+        AppState.posts.splice(AppState.posts.findIndex(p => p.id == post.id), 1, new Post(res.data))
+    }
+
     async removePost(id) {
         const res = await api.delete('api/posts/' + id)
+        logger.log(res.data)
         AppState.posts = AppState.posts.filter(p => p.id != post.id)
+    }
+
+    async filterPosts(searchTerm, page) {
+        const res = await api(`api/posts?query=${searchTerm}&page=${page}`)
+        console.log('filter post res', res)
+        AppState.searchResults = res.data.map(p => new Post(p))
+        AppState.totalPages = res.data.total_pages
+        AppState.currentPage = res.data.page
     }
 }
 
