@@ -10,10 +10,16 @@
       <p>
         <small>{{ profile.email }}</small>
       </p>
-      <p>GitHub:{{ profile.github }} LinkedIn:{{ profile.linkedin }}</p>
+      <a :href="profile.github" class="text-dark selectable p-2 mt-2"
+        ><strong>Github Account</strong></a
+      >
+      <a :href="profile.linkedin" class="text-dark selectable p-2 mt-2"
+        ><strong>Linked In Account</strong></a
+      >
       <p>{{ profile.class }}</p>
       <p>{{ profile.bio }}</p>
-      <p>Graduated: {{ profile.graduated }}</p>
+      <p>Graduated:</p>
+      <p>{{ profile.graduated }}</p>
     </div>
   </div>
 </template>

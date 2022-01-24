@@ -5,7 +5,6 @@ import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 class PostsService {
-
     async getAllPosts(query = '') {
         const res = await api.get('api/posts' + query)
         logger.log(res.data)
@@ -26,13 +25,13 @@ class PostsService {
     }
 
     async likePost(id) {
-        const res = await api.post(`api/posts/:id/like`, id)
+        const res = await api.post(`api/posts/${id}/like`)
         logger.log(res.data)
     }
     async filterPosts(searchTerm, page) {
         const res = await api(`api/posts?query=${searchTerm}&page=${page}`)
         console.log('filter post res', res)
-        AppState.searchResults = res.data.posts(p => new Post(p))
+        // AppState.searchResults = res.data.posts(p => new Post(p))
         AppState.totalPages = res.data.total_pages
         AppState.currentPage = res.data.page
     }

@@ -1,8 +1,8 @@
 <template>
-  <div class="col-md-8 m-3">
+  <div class="col-12 m-3">
     <div
       class="card-lg bg-dark border-primary border-4 mb-3"
-      style="max-width: 18rem"
+      style="max-width: 26rem"
     >
       <div
         class="card-header d-flex justify-content-around selectable"
@@ -17,14 +17,14 @@
       </div>
       <div class="card-footer d-flex justify-content-around">
         <div class="text-center">
-          <!-- TODO 
-          moment(this.createdAt).startOf('hour').fromNow()
-           -->
           <small> {{ Time() }}</small>
         </div>
         <span
           ><i @click="likePost()" class="selectable mdi mdi-heart"></i>
-          <p>{{ post.like }}</p></span
+          <p>
+            Liked By:
+            <span v-for="u in post.likes" :key="u.id">{{ u.name }}</span>
+          </p></span
         >
         <span
           ><i
