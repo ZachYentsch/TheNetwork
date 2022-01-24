@@ -5,13 +5,13 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2 bg-primary">
+        <div class="col-md-3 bg-primary">
           <SideBar />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <router-view />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <Animes v-for="a in animes" :key="a.title" :anime="a" />
         </div>
       </div>

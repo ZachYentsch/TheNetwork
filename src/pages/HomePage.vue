@@ -1,19 +1,17 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <button
-          class="btn btn-primary m-2"
-          v-for="o in oldestPages"
-          :key="o"
-          @click="nextPage(o)"
-        >
-          Older
-        </button>
-      </div>
       <CreatePost />
       <Post v-for="p in posts" :key="p.id" :post="p" />
     </div>
+    <button
+      class="btn btn-primary m-2 text-dark"
+      v-for="p in totalPages"
+      :key="p"
+      @click="nextPage(p)"
+    >
+      {{ p }}
+    </button>
   </div>
 </template>
 
@@ -37,6 +35,7 @@ export default {
       }
     });
     return {
+      totalPages: computed(() => AppState.totalPages),
       posts: computed(() => AppState.posts),
 
       async nextPage(page) {

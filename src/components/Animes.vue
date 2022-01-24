@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img :src="anime.tall" alt="" width="200" />
+  <div class="mx-5">
+    <img :src="anime.tall" alt="" width="225" />
   </div>
 </template>
 

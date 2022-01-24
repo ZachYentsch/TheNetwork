@@ -16,22 +16,21 @@
         <p class="card-text m-3">{{ post.body }}</p>
       </div>
       <div class="card-footer d-flex justify-content-around">
-        <div class="text-center"><small>2 hours ago</small></div>
+        <div class="text-center">
+          <!-- TODO 
+          moment(this.createdAt).startOf('hour').fromNow()
+           -->
+          <small> {{ Time() }}</small>
+        </div>
         <span
-          ><i class="mdi mdi-heart"></i>
-          <p>1</p></span
+          ><i @click="likePost()" class="selectable mdi mdi-heart"></i>
+          <p>{{ post.like }}</p></span
         >
         <span
           ><i
             v-if="post.creatorId == account.id"
             @click="removePost()"
             class="mdi mdi-trash-can selectable"
-          ></i
-          ><i
-            v-if="post.creatorId == account.id"
-            date-bs-toggle="modal"
-            data-bs-target="#edit-modal"
-            class="mdi mdi-pencil selectable"
           ></i
         ></span>
       </div>
@@ -59,6 +58,10 @@ export default {
     return {
       account: computed(() => AppState.account),
       router,
+      Time() {
+        const event = new Date(props.post.createdAt);
+        return event;
+      },
       // REVIEW Why does this work only work on refresh
       async removePost() {
         try {
@@ -68,9 +71,9 @@ export default {
           logger.log(error.message);
         }
       },
-      async editPost() {
+      async likePost() {
         try {
-          await postsService.editPost(props.post);
+          await postsService.likePost(props.post.id);
         } catch (error) {
           logger.log(error.message);
           Pop.toast(error.message, "error");

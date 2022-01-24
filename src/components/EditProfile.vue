@@ -7,7 +7,6 @@
           class="form-control"
           placeholder="Name..."
           v-model="editable.name"
-          required
         />
       </div>
       <div class="col-md-5 mb-2">
@@ -35,10 +34,15 @@
         />
       </div>
       <div class="col-md-5 mb-2">
-        <select name="graduated" id="graduated" class="form-control">
-          <option disabled selected value="">Please Choose One</option>
-          <option>Yes, Graduated</option>
-          <option>No Graduated</option>
+        <select
+          v-model="editable.graduated"
+          name="graduated"
+          id="graduated"
+          class="form-control"
+        >
+          <option disabled selected value="">Graduated</option>
+          <option>true</option>
+          <option>false</option>
         </select>
       </div>
       <div class="col-md-6 mb-2">
@@ -77,14 +81,16 @@ import { ref } from "@vue/reactivity";
 import Pop from "../utils/Pop";
 import { logger } from "../utils/Logger";
 import { profilesService } from "../services/ProfilesService";
+import { useRoute } from "vue-router";
 export default {
   setup() {
+    const route = useRoute();
     const editable = ref({});
     return {
       editable,
       async editProfile() {
         try {
-          await profilesService.editProfile(editable.value);
+          await profilesService.editProfile(editable.value, route.params.id);
           editable.value = {};
           Pop.toast("Profile Changed Successfully");
         } catch (error) {

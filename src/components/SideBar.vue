@@ -3,11 +3,17 @@
     class="col-md-2 d-md-flex flex-column justify-content-between bg-primary"
     style="height: 75vh"
   >
-    <div class="py-3 align-items-center">
-      <img :src="user.picture" alt="" height="60" class="rounded" />
-      <h5>{{ user.name }}</h5>
-      <p>{{ user.email }}</p>
-      <p>{{ user.bio }}</p>
+    <div class="align-items-center mt-2">
+      <img :src="profile.coverImg" alt="" height="100" />
+      <img :src="profile.picture" alt="" height="60" class="rounded" />
+      <h5>{{ profile.name }}</h5>
+      <p>
+        <small>{{ profile.email }}</small>
+      </p>
+      <p>GitHub:{{ profile.github }} LinkedIn:{{ profile.linkedin }}</p>
+      <p>{{ profile.class }}</p>
+      <p>{{ profile.bio }}</p>
+      <p>Graduated: {{ profile.graduated }}</p>
     </div>
   </div>
 </template>
@@ -19,7 +25,7 @@ import { AppState } from "../AppState";
 export default {
   setup() {
     return {
-      user: computed(() => AppState.user),
+      profile: computed(() => AppState.profile),
     };
   },
 };
