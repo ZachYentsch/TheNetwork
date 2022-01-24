@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import Pop from "../utils/Pop";
 import { logger } from "../utils/Logger";
 import Post from "../components/Post.vue";
